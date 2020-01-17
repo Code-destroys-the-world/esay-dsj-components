@@ -1,16 +1,24 @@
 <template>
   <div>
-    <canvas id="dsj-canvas__boll" style="border-radius: 100%;"></canvas>
+    <canvas id="dsj-canvas__boll" style="border-radius: 100%;" @click="$emit('click')"></canvas>
   </div>
 </template>
 <script>
 export default {
-  name: 'dsj-canvasboll',
+  name: 'dsj-waterBall',
   props: {
+    data: {
+      type: [String, Number],
+      default: ''
+    },
     score: {
       type: [ String, Number ],
       default: 100,
       required: true
+    },
+    Subheading: {
+      type: [String, Number],
+      default: ''
     },
     color: {
       type: Array,
@@ -38,13 +46,15 @@ export default {
       default: true
     },
     suffix: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   watch: {
     'score': {
       handler () {
-        this.canvasBoll.BOLL_SCORE = this.score / 100
+        this.canvasBoll.INIT_SCORE = this.initSCORE(this.score)
+        this.canvasBoll.BOLL_SCORE = this.canvasBoll.INIT_SCORE / 100
       }
     },
     'color': {
@@ -67,7 +77,8 @@ export default {
   },
   created () {
     this.canvasBoll.BOLL_LINES = this.color
-    this.canvasBoll.BOLL_SCORE = this.score / 100
+    this.canvasBoll.INIT_SCORE = this.initSCORE(this.score)
+    this.canvasBoll.BOLL_SCORE = this.canvasBoll.INIT_SCORE / 100
   },
   mounted () {
     this.canvasBoll.BOLL_CANVAS = document.getElementById('dsj-canvas__boll')
@@ -77,6 +88,22 @@ export default {
     this.loop()
   },
   methods: {
+    initSCORE (_score) {
+      let score;
+      if (typeof _score !== 'number') {
+        if (_score.indexOf('%') != -1) {
+          score = Number(_score.replace('%', ''));
+        } else {
+          score = Number(_score);
+        }
+      } else {
+        score = _score;
+      }
+      if (score < 0) {
+        score = 0;
+      }
+      return score;
+    },
     requestAnimFrame (callback) {
       window.setTimeout(callback, 1000 / 60);
     },
@@ -90,7 +117,13 @@ export default {
         this.canvasBoll.BOLL_CTX.font = '28px bold 黑体'
         this.canvasBoll.BOLL_CTX.fillStyle = '#fff'
         this.canvasBoll.BOLL_CTX.textAlign = 'center'
-        this.canvasBoll.BOLL_CTX.fillText(this.score + this.suffix, this.canvasBoll.BOLL_CANVAS.width / 2, this.canvasBoll.BOLL_CANVAS.height / 2)
+        this.canvasBoll.BOLL_CTX.fillText((this.data ? this.data : this.score) + this.suffix, this.canvasBoll.BOLL_CANVAS.width / 2, this.canvasBoll.BOLL_CANVAS.height / 2)
+      }
+      if (this.Subheading !== '') {
+        this.canvasBoll.BOLL_CTX.font = '16px bold 黑体'
+        this.canvasBoll.BOLL_CTX.fillStyle = '#fff'
+        this.canvasBoll.BOLL_CTX.textAlign = 'center'
+        this.canvasBoll.BOLL_CTX.fillText(this.Subheading, this.canvasBoll.BOLL_CANVAS.width / 2, (this.canvasBoll.BOLL_CANVAS.height / 2) + 30)
       }
       this.requestAnimFrame(this.loop)
     },
@@ -114,11 +147,11 @@ export default {
           let deltaHeightRight   = Math.cos(angle) * 10
           //console.log(this.canvasBoll.BOLL_CANVAS.height*this.canvasBoll.BOLL_SCORELAST+deltaHeight,this.canvasBoll.BOLL_CANVAS.height/2+deltaHeight)
           this.canvasBoll.BOLL_CTX.beginPath()
-          if (this.canvasBoll.BOLL_SCORELAST != Number(this.score)) {
-            if (this.canvasBoll.BOLL_SCORELAST < Number(this.score)) {
-              this.canvasBoll.BOLL_SCORELAST = Number(this.score) - this.canvasBoll.BOLL_SCORELAST <= 2 ? this.canvasBoll.BOLL_SCORELAST = Number(this.score) : this.canvasBoll.BOLL_SCORELAST + 1
+          if (this.canvasBoll.BOLL_SCORELAST != this.canvasBoll.INIT_SCORE) {
+            if (this.canvasBoll.BOLL_SCORELAST < this.canvasBoll.INIT_SCORE) {
+              this.canvasBoll.BOLL_SCORELAST = this.canvasBoll.INIT_SCORE - this.canvasBoll.BOLL_SCORELAST <= 2 ? this.canvasBoll.BOLL_SCORELAST = this.canvasBoll.INIT_SCORE : this.canvasBoll.BOLL_SCORELAST + 1
             } else {
-              this.canvasBoll.BOLL_SCORELAST = this.canvasBoll.BOLL_SCORELAST - Number(this.score) <= 2 ? this.canvasBoll.BOLL_SCORELAST = Number(this.score) : this.canvasBoll.BOLL_SCORELAST - 1
+              this.canvasBoll.BOLL_SCORELAST = this.canvasBoll.BOLL_SCORELAST - this.canvasBoll.INIT_SCORE <= 2 ? this.canvasBoll.BOLL_SCORELAST = this.canvasBoll.INIT_SCORE : this.canvasBoll.BOLL_SCORELAST - 1
             }
           }
           this.canvasBoll.BOLL_SCORE = this.canvasBoll.BOLL_SCORELAST / 100

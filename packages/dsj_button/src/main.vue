@@ -1,5 +1,5 @@
 <template>
-  <div :class="['dsj_btn',
+  <div @click="$emit('click')" :class="['dsj_btn',
       type ? 'fsj_button--' + type : ''
     ]"
     :style="`width: ${width}px`">
@@ -35,7 +35,7 @@ export default {
   font-weight: 400;
   line-height: 30px;
   margin: 0 0 2em;
-  width: 160px;
+  width: 100%;
   text-align: center;
   position: relative;
   text-decoration: none;

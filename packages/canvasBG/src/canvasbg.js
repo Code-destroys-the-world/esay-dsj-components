@@ -1,5 +1,5 @@
 
-  var ParticleNetworkAnimation, PNA;
+  let ParticleNetworkAnimation, PNA;
   ParticleNetworkAnimation = PNA = function() {};
 
   PNA.prototype.init = function(element) {
@@ -29,7 +29,7 @@
     this.canvas.height = this.container.offsetHeight;
   };
 
-  var Particle = function(parent, x, y) {
+  let Particle = function(parent, x, y) {
     this.network = parent;
     this.canvas = parent.canvas;
     this.ctx = parent.ctx;
@@ -74,7 +74,7 @@
     this.ctx.fill();
   };
 
-  var ParticleNetwork = function(parent) {
+  let ParticleNetwork = function(parent) {
     this.options = {
       velocity: 1, // the higher the faster
       density: 15000, // the lower the denser
@@ -100,13 +100,13 @@
 
   ParticleNetwork.prototype.createParticles = function(isInitial) {
     // Initialise / reset particles
-    var me = this;
+    let me = this;
     this.particles = [];
-    var quantity =
+    let quantity =
       (this.canvas.width * this.canvas.height) / this.options.density;
 
     if (isInitial) {
-      var counter = 0;
+      let counter = 0;
       clearInterval(this.createIntervalId);
       this.createIntervalId = setInterval(
         function() {
@@ -122,7 +122,7 @@
       );
     } else {
       // Create particle objects
-      for (var i = 0; i < quantity; i++) {
+      for (let i = 0; i < quantity; i++) {
         this.particles.push(new Particle(this));
       }
     }
@@ -141,7 +141,7 @@
 
   ParticleNetwork.prototype.removeInteractionParticle = function() {
     // Find it
-    var index = this.particles.indexOf(this.interactionParticle);
+    let index = this.particles.indexOf(this.interactionParticle);
     if (index > -1) {
       // Remove it
       this.interactionParticle = undefined;
@@ -155,9 +155,9 @@
       this.ctx.globalAlpha = 1;
 
       // Draw connections
-      for (var i = 0; i < this.particles.length; i++) {
-        for (var j = this.particles.length - 1; j > i; j--) {
-          var distance,
+      for (let i = 0; i < this.particles.length; i++) {
+        for (let j = this.particles.length - 1; j > i; j--) {
+          let distance,
             p1 = this.particles[i],
             p2 = this.particles[j];
 
@@ -190,7 +190,7 @@
       }
 
       // Draw particles
-      for (var i = 0; i < this.particles.length; i++) {
+      for (let i = 0; i < this.particles.length; i++) {
         this.particles[i].update();
         this.particles[i].draw();
       }
@@ -229,15 +229,15 @@
 
     this.onMouseDown = function() {
       this.mouseIsDown = true;
-      var counter = 0;
-      var quantity = this.spawnQuantity;
-      var intervalId = setInterval(
+      let counter = 0;
+      let quantity = this.spawnQuantity;
+      let intervalId = setInterval(
         function() {
           if (this.mouseIsDown) {
             if (counter === 1) {
               quantity = 1;
             }
-            for (var i = 0; i < quantity; i++) {
+            for (let i = 0; i < quantity; i++) {
               if (this.interactionParticle) {
                 this.particles.push(
                   new Particle(
@@ -262,7 +262,7 @@
       setTimeout(
         function() {
           if (!this.touchIsMoving) {
-            for (var i = 0; i < this.spawnQuantity; i++) {
+            for (let i = 0; i < this.spawnQuantity; i++) {
               this.particles.push(
                 new Particle(
                   this,
@@ -312,15 +312,15 @@
     }
   };
 
-  var getLimitedRandom = function(min, max, roundToInteger) {
-    var number = Math.random() * (max - min) + min;
+  let getLimitedRandom = function(min, max, roundToInteger) {
+    let number = Math.random() * (max - min) + min;
     if (roundToInteger) {
       number = Math.round(number);
     }
     return number;
   };
 
-  var returnRandomArrayitem = function(array) {
+  let returnRandomArrayitem = function(array) {
     return array[Math.floor(Math.random() * array.length)];
   };
 

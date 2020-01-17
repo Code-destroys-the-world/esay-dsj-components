@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-09-21 19:29:07
+ * @LastEditTime : 2020-01-13 16:12:57
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \esay-dsj-components\README.md
+ -->
 # reuse-compontent
 
 ## Project setup
@@ -28,25 +36,11 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### 公司NPM源
-```
-http://npm-registry.cloud.thunisoft.com/
-```
-
 ### 打包
 ```
 npm run lib
 ```
 
-### 登陆Npm仓库账号
-```
-npm adduser
-```
-
-### 无法登陆公司npm情况
-```
-npm adduser --registry http://npm-registry.cloud.thunisoft.com/repository/npm-releases/
-```
 
 ### 发布
 ```

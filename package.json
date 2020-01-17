@@ -1,6 +1,6 @@
 {
   "name": "easy-dsj",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "常用展示类模块",
   "main": "lib/easy-dsj.umd.min.js",
   "author": "何鹏",
