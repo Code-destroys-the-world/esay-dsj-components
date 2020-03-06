@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    name: "sdj-diffusion"
+  name: 'dsj-diffusion'
 }
 </script>
 <style scoped>

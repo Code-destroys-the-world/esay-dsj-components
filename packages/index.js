@@ -2,7 +2,7 @@
  * @Author: HePeng
  * @Date: 2019-09-18 14:09:07
  * @Last Modified by: HePeng
- * @Last Modified time: 2019-10-20 12:48:04
+ * @Last Modified time: 2020-03-06 17:38:58
  */
 // packages / index.js
 
@@ -10,15 +10,19 @@
 import canvasboll from './canvasBoll/index'
 import Diffusion from './diffusion/index'
 import canvasBGLZ from './canvasBG/index'
+import canvasBGLZ2 from './canvasBG2/index'
 import DsjButtom from './dsj_button/index'
+import ChartAnnular from './chart_annular/index'
 
 // 以数组的结构保存组件，便于遍历
 const components = [
   canvasboll,
   Diffusion,
   canvasBGLZ,
-  DsjButtom
-]
+  DsjButtom,
+  ChartAnnular,
+  canvasBGLZ2
+];
 
 // 定义 install 方法
 const install = function (Vue) {

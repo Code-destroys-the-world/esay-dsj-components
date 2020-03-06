@@ -12,10 +12,17 @@
       :data="'4657'"
       :distance='distance'/>
       <input type="text" v-model="score">
+      <div class="fd-annularCharts">
+        <dsj-annularCharts :propData="score2" :props="propsData" @click="annularChartsChange"></dsj-annularCharts>
+        <input type="text" v-model="score2.code">
+      </div>
       <h2>扩散动画</h2>
-      <sdj-diffusion></sdj-diffusion>
+      <dsj-diffusion></dsj-diffusion>
       <h2>canvas动画</h2>
       <dsj-bgLz></dsj-bgLz>
+      <div class="canvasBG">
+        <dsj-canvasbg2></dsj-canvasbg2>
+      </div>
   </div>
 </template>
 
@@ -35,12 +42,22 @@ export default {
         w: 155,
         h: 155
       },
-      score: '30%'
+      score: '30%',
+      score2: {
+        code: 50,
+        id: '213dwadwa'
+      },
+      propsData: {
+        data: 'code'
+      }
     }
   },
   methods: {
     abc () {
       console.log(123312)
+    },
+    annularChartsChange (_item) {
+      console.log(_item)
     }
   }
 }
@@ -54,5 +71,13 @@ export default {
   margin: 0;
   background: #E1332D;
   font-family: 'Roboto', sans-serif;
+}
+.fd-annularCharts {
+  width: 100px;
+  height: 100px;
+}
+.canvasBG {
+  width: 100%;
+  height: 80vh;
 }
 </style>
