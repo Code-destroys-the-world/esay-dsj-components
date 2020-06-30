@@ -51,3 +51,8 @@ npm publish
 ```
 npm logout
 ```
+
+### 切换分支
+```
+npm adduser
+```

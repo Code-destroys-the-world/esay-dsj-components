@@ -22,11 +22,11 @@ export default {
     },
     graphStrokeWidth: {
       type: [String, Number],
-      default: 4
+      default: 6
     },
     arcStrokeWidth: {
       type: [String, Number],
-      default: 4
+      default: 2
     },
     graphColor: {
       type: String,
@@ -34,7 +34,7 @@ export default {
     },
     arcColor: {
       type: String,
-      default: '#f00'
+      default: '#4fcdf4'
     },
     wrapperBG: {
       type: String,
@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     initData () {
-      this.numberData = typeof this.propData === 'object' ? this.propData[this.props.data] : this.propData
+      this.numberData = typeof this.propData === 'object' ? 100 - this.propData[this.props.data] : 100 - this.propData
       this.$refs.svg.children[1].style['--val'] = this.numberData
     },
     clickChange () {
@@ -124,6 +124,8 @@ export default {
     stroke-dasharray: 251.35;
     stroke-dashoffset: calc(  251.35 / 100 * var( --val )  );
     transition: stroke-dashoffset .8s ease-out;
+    stroke-linecap: round;
     stroke-width: 4px;
+    transform: translateX(100px) rotateY(180deg);
   }
 </style>

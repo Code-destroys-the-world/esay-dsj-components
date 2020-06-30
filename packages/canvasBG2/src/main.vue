@@ -1,19 +1,17 @@
 <template>
-  <div class="fd-canvas__bg">
-    <canvas id="canvas__bg2"></canvas>
-  </div>
+  <canvas id="target"></canvas>
 </template>
 <script>
-import initCanvas from './initCanvas.js'
+import initC from './initCanvas.js'
 export default {
   name: 'dsj-canvasbg2',
-  created () {
-    initCanvas()
+  mounted () {
+    initC.creatCanvas(document.getElementById('target'))
   }
 }
 </script>
 <style>
-  .fd-canvas__bg {
+  #target {
     width: 100%;
     height: 100%;
   }

@@ -2,14 +2,14 @@
   let ParticleNetworkAnimation, PNA;
   ParticleNetworkAnimation = PNA = function() {};
 
-  PNA.prototype.init = function(element) {
+  PNA.prototype.init = function(element, option) {
 
     this.container = element;
     this.canvas = document.createElement("canvas");
     this.sizeCanvas();
     this.container.appendChild(this.canvas);
     this.ctx = this.canvas.getContext("2d");
-    this.particleNetwork = new ParticleNetwork(this);
+    this.particleNetwork = new ParticleNetwork(this, option);
 
     this.bindUiActions();
 
@@ -74,14 +74,15 @@
     this.ctx.fill();
   };
 
-  let ParticleNetwork = function(parent) {
+  let ParticleNetwork = function(parent, options) {
     this.options = {
       velocity: 1, // the higher the faster
       density: 15000, // the lower the denser
       netLineDistance: 200,
-      netLineColor: "#929292",
-      particleColors: ["#aaa"] // ['#6D4E5C', '#aaa', '#FFC458' ]
+      netLineColor: "#fff",
+      particleColors: ["#000"], // ['#6D4E5C', '#aaa', '#FFC458' ]
     };
+    Object.assign(this.options, options);
     this.canvas = parent.canvas;
     this.ctx = parent.ctx;
 

@@ -4,25 +4,22 @@
     <dsj-button type="4">保存</dsj-button>
     <dsj-waterBall
       @click="abc"
-      :titleSold='true'
-      :suffix='"分"'
-      :Subheading="'我是副标题'"
       :score='score'
-      :color='bollColor'
-      :data="'4657'"
       :distance='distance'/>
       <input type="text" v-model="score">
       <div class="fd-annularCharts">
-        <dsj-annularCharts :propData="score2" :props="propsData" @click="annularChartsChange"></dsj-annularCharts>
+        <dsj-annularCharts :propData="score2.code" :graphColor="'#7ee8ff'" @click="annularChartsChange"></dsj-annularCharts>
         <input type="text" v-model="score2.code">
       </div>
       <h2>扩散动画</h2>
       <dsj-diffusion></dsj-diffusion>
-      <h2>canvas动画</h2>
+      <h2>canvas动画1</h2>
       <dsj-bgLz></dsj-bgLz>
+      <h2>canvas动画2</h2>
       <div class="canvasBG">
         <dsj-canvasbg2></dsj-canvasbg2>
       </div>
+      <h2>canvas动画3</h2>
   </div>
 </template>
 
@@ -31,13 +28,6 @@ export default {
   name: 'app',
   data () {
     return {
-      bollColor: [{
-        to: 'rgba(254,200,85, 1)',
-        from: 'rgba(255,202,87, 0.2)'
-      },{
-        to: 'rgba(254,200,85, 0.6)',
-        from: 'rgba(255,202,87, 0.2)'
-      }],
       distance: {
         w: 155,
         h: 155
